@@ -64,7 +64,7 @@ Tasks:
 
 Results:
 
-- `jenkins-job-url`, **required** a string result that outputs the url of the jenkins build
+- `jenkins-job-url`, a string result that outputs the url of the jenkins build
   that the tekton task triggered. This output is populated by the `jenkins-task` `ClusterTask`
 
 For example:
@@ -80,7 +80,7 @@ metadata:
     apps.tanzu.vmware.com/pipeline: jenkins-pipeline
 spec:
   results:
-  #! Required: To show the job url on the UI
+  #! To show the job url on the UI
   - name: jenkins-job-url
     value: $(tasks.jenkins-task.results.jenkins-job-url)
   params:
@@ -150,8 +150,8 @@ tanzu apps workload create tanzu-java-web-app \
   --git-repo https://github.com/sample-accelerators/tanzu-java-web-app \
   --label apps.tanzu.vmware.com/has-tests=true \
   --label app.kubernetes.io/part-of=tanzu-java-web-app \
-  --param-yaml testing-pipeline-matching-labels='{"apps.tanzu.vmware.com/pipeline":"jenkins-pipeline"}' \
-  --param-yaml testing-pipeline-params='{"secret_name":"jenkins-secret", "job_name": "jenkins-job", "job_params": [{"name":"param1","value":"value1"}]}'
+  --param-yaml testing_pipeline_matching_labels='{"apps.tanzu.vmware.com/pipeline":"jenkins-pipeline"}' \
+  --param-yaml testing_pipeline_params='{"secret_name":"jenkins-secret", "job_name": "jenkins-job", "job_params": [{"name":"param1","value":"value1"}]}'
   --type web
 ```
 
@@ -167,16 +167,16 @@ tanzu apps workload create tanzu-java-web-app \
       9 + |  namespace: default
      10 + |spec:
      11 + |  params:
-     12 + |  - name: testing-pipeline-matching-labels
+     12 + |  - name: testing_pipeline_matching_labels
      13 + |    value:
      14 + |      apps.tanzu.vmware.com/pipeline: jenkins-pipeline
-     15 + |  - name: testing-pipeline-params
+     15 + |  - name: testing_pipeline_params
      16 + |    value:
-     17 + |      job_name: jenkins-job
-     18 + |      job_params:
+     17 + |      job-name: jenkins-job
+     18 + |      job-params:
      19 + |      - name: param1
      20 + |        value: value1
-     21 + |      secret_name: jenkins-secret
+     21 + |      secret-name: jenkins-secret
      22 + |  source:
      23 + |    git:
      24 + |      ref:
